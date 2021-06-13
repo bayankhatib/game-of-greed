@@ -39,24 +39,22 @@ class GameLogic:
   
    @staticmethod
    def calculate_score(a):
-     score = 0
-     roll_dice_Input=Counter(a)
-     if len(roll_dice_Input.most_common()) == 3 : 
-       if roll_dice_Input.most_common()[0][1]==2 and roll_dice_Input.most_common()[1][1]==2 and roll_dice_Input.most_common()[2][1]==2 :
-         return 1500
-     if a ==():
-       return 0
-     elif roll_dice_Input.most_common(1)[0]== (1,1) and len( roll_dice_Input.most_common())==6:
-       score=1500
-       return score
-     else :
-       dic_counter= Counter(all_rules)
-       case01=roll_dice_Input.most_common()
-       #case01= [(1, 1), (2, 1), (3, 1), (4, 1), (6, 1)]
-       for case in  case01:
-          score+=dic_counter[str(case)]
-          print(score)
-       return score 
+    score = 0
+    roll_dice_Input=Counter(a)
+    if len(roll_dice_Input.most_common()) == 3 and roll_dice_Input.most_common()[0][1]==2 and roll_dice_Input.most_common()[1][1]==2 and roll_dice_Input.most_common()[2][1]==2 :
+        return 1500
+    if a ==():
+      return 0
+    elif roll_dice_Input.most_common(1)[0]== (1,1) and len( roll_dice_Input.most_common())==6:
+      score=1500
+      return score
+    else :
+      dic_counter= Counter(all_rules)
+      case01=roll_dice_Input.most_common()
+      for case in  case01:
+        score+=dic_counter[str(case)]
+        print(score)
+      return score 
   
    @staticmethod 
    def roll_dice(value):
@@ -67,17 +65,8 @@ class GameLogic:
         
 
 
-# if __name__=='main':
-l=GameLogic()
-# print(l.calculate_score((1,2,3,4,5,6)))
-# print(l.calculate_score((5,)))
-# print(l.calculate_score((5,5)))
 
-# print(l.calculate_score((5,5,5,2,2,3)))
-# test=GameLogic.calculate_score((1,3,1,1,5,5))
-# print(test)/
-# print('-***********',tuple())
-GameLogic.calculate_score((5, 5))
+# 
 
 
 
