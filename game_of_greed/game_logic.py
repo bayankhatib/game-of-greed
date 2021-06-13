@@ -60,14 +60,11 @@ class GameLogic:
   
    @staticmethod 
    def roll_dice(value):
-    """
-    roll_dice
-    """
-    values = []
-    for i in range(value):
-      values.append(random.randint(1,6))
-    return values
-       
+      values = []
+      for i in range(value):
+        values.append(random.randint(1,6))
+      return values
+        
 
 
 # if __name__=='main':
