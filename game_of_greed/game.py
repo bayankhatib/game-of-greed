@@ -4,9 +4,6 @@ class Game:
     def __init__(self, roller=None,score=0):
         self.roller = roller
         self.calculate_score=score
-        # self.shelf=shelf
-        # self.bank=bank
-        # print(shelf)
 
     def play(self):
         print("Welcome to Game of Greed")
@@ -16,20 +13,26 @@ class Game:
         else:
             int_banker=Banker()
             counter_remaining=6
-            while():
-                print('Starting round 1')
+            counter_looping=1
+            while(True):
+                print(f'Starting round {counter_looping}')
                 print('Rolling 6 dice...')
                 dice = self.roller(6)
                 printable_dice = ','.join([str(d) for d in dice])
                 print(printable_dice)
                 do_quit = input("Enter dice to keep (no spaces), or (q)uit: ")
                 if do_quit == 'q':
-                    print('Thanks for playing. You earned 0 points')
+                    if int_banker.balance != 0 :
+                        print(f'Total score is {int_banker.balance} points')
+                    print(f'Thanks for playing. You earned {int_banker.balance} points')
+                    break
                 else :
-                    
                     turn_to_list=list(do_quit)
                     turn_to_tuple=tuple(int(x) for x in turn_to_list)
+                    # turn_to_tuple=tuple(turn_to_list)
+                    # print(turn_to_tuple)
                     score=self.calculate_score(turn_to_tuple)
+                    
                     counter_remaining-=len(turn_to_tuple)
                     print(f'You have {score} unbanked points and {counter_remaining} dice remaining') 
                     int_banker.shelf(score)
@@ -38,6 +41,7 @@ class Game:
                     if ask_for_roll_again=='b':
                         print(f'You banked {int_banker.balance} points in round 1')
                         print(f'Total score is {int_banker.balance} points')
+                        counter_looping+=1
 
     
 
