@@ -53,11 +53,10 @@ class GameLogic:
       case01=roll_dice_Input.most_common()
       for case in  case01:
         score+=dic_counter[str(case)]
-        print(score)
       return score 
   
    @staticmethod 
-   def roll_dice(value):
+   def roll_dice(value=6):
       values = []
       for i in range(value):
         values.append(random.randint(1,6))
