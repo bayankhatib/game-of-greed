@@ -29,9 +29,8 @@ class Game:
                 else :
                     turn_to_list=list(do_quit)
                     turn_to_tuple=tuple(int(x) for x in turn_to_list)
-                    # turn_to_tuple=tuple(turn_to_list)
                     # print(turn_to_tuple)
-                    score=self.calculate_score(turn_to_tuple)
+                    score=GameLogic.calculate_score(turn_to_tuple)
                     
                     counter_remaining-=len(turn_to_tuple)
                     print(f'You have {score} unbanked points and {counter_remaining} dice remaining') 
