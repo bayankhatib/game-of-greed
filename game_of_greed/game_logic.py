@@ -61,7 +61,7 @@ class GameLogic:
       values = []
       for i in range(value):
         values.append(random.randint(1,6))
-      return values
+      return tuple(values)
         
 
 
