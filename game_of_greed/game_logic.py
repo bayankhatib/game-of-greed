@@ -53,16 +53,36 @@ class GameLogic:
       case01=roll_dice_Input.most_common()
       for case in  case01:
         score+=dic_counter[str(case)]
-        print(score)
       return score 
   
    @staticmethod 
-   def roll_dice(value):
+   def roll_dice(value=6):
       values = []
       for i in range(value):
         values.append(random.randint(1,6))
       return tuple(values)
         
+
+
+class Banker:
+
+    def __init__(self,balance=0,shelved=0):
+        self.balance=balance
+        self.shelved=shelved
+
+    def shelf(self,value):
+       self.shelved=value
+
+    def bank(self):
+        self.balance=self.shelved
+        self.clear_shelf()
+        return self.balance
+
+    def clear_shelf(self):
+        self.shelved=0
+
+
+
 
 
 
