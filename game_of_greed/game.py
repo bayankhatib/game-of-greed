@@ -5,6 +5,7 @@ class Game:
         self.roller = roller
         self.total=0
         self.round=1
+        self.dice=6
     def play(self):
         print("Welcome to Game of Greed")
         user_input = input("Wanna play? ")
@@ -12,7 +13,6 @@ class Game:
             print("OK. Maybe another time")
         else:
             int_banker=Banker()
-            counter_remaining=6
             while(True):
                 print(f'Starting round {self.round}')
                 print('Rolling 6 dice...')
@@ -22,8 +22,8 @@ class Game:
                 do_quit = input("Enter dice to keep (no spaces), or (q)uit: ")
                 if do_quit == 'q':
                     if int_banker.balance != 0 :
-                        print(f'Total score is {int_banker.balance} points')
-                    print(f'Thanks for playing. You earned {int_banker.balance} points')
+                        print(f'Total score is {self.total} points')
+                    print(f'Thanks for playing. You earned {self.total} points')
                     break
                 else :
                     turn_to_list=list(do_quit)
@@ -31,16 +31,16 @@ class Game:
                     # print(turn_to_tuple)
                     score=GameLogic.calculate_score(turn_to_tuple)
                     
-                    counter_remaining-=len(turn_to_tuple)
-                    print(f'You have {score} unbanked points and {counter_remaining} dice remaining') 
+                    self.dice-=len(turn_to_tuple)
+                    print(f'You have {score} unbanked points and {self.dice} dice remaining') 
                     int_banker.shelf(score)
                     ask_for_roll_again=input('(r)oll again, (b)ank your points or (q)uit ')
                     int_banker.bank()
                     self.total+=int_banker.balance
-                    new_total=self.total
                     if ask_for_roll_again=='b':
-                        print(f'You banked {int_banker.balance} points in round 1')
-                        print(f'Total score is {new_total} points')
+                        self.dice=6
+                        print(f'You banked {int_banker.balance} points in round {self.round}')
+                        print(f'Total score is {self.total} points')
                         self.round+=1
 
 
