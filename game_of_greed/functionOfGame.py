@@ -13,7 +13,7 @@ class GameFunction():
       #   dice = roller()
         printable_dice = ','.join([str(d) for d in roller])
         print(printable_dice)
-
+        return printable_dice
   def quitting(balance):
         '''
         function for quit the game

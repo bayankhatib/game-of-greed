@@ -20,7 +20,6 @@ class Game:
        to start round 1 and can roll the dice and choose from dice,
        also known banked and unbanked points and total score 
        for six round and user can quit the game. 
-
         """
         print("Welcome to Game of Greed")
         user_input = input("Wanna play? ")
@@ -28,34 +27,42 @@ class Game:
             print("OK. Maybe another time")
         elif user_input == 'y':
             r=True
+            start_condition=True
             while(True):
-                roller_dice=self.roller(6)
-                GameFunction.rolling(self.round,roller_dice,r)
+                '''
+                auto get random and 
+                '''
+                if start_condition==True:
+                    roller_dice=self.roller(6)#return tuple(values) like (3, 1, 4, 4, 6, 4)                    
+                    randomNumber=GameFunction.rolling(self.round,roller_dice,r)# output 3, 1, 4, 4, 6, 4
                 do_quit = input("Enter dice to keep (no spaces), or (q)uit: ")
-                
-                
                 if do_quit == 'q':
                     GameFunction.quitting(self.banker.balance)
                     break
+                    print('----randomNumber-------',randomNumber)
 
                
                 else :
-                      
-
                     turn_to_list =list(do_quit)
-                    turn_to_tuple=tuple(int(x) for x in turn_to_list)
-                            
+                    turn_to_tuple=tuple(int(x) for x in turn_to_list)      
                     l1=Counter(turn_to_tuple).most_common() 
-                    # print(l1 ,'***',self.roller)
+                    print(l1 ,'***')
                     l2=Counter(roller_dice).most_common() 
-                    # print(l2,l1)
-                    check =  all(item in l1 for item in l2)
+                    print(l2,'sec list' )
+                    check =  all(item in l1 for item in l1)
+                    print('before check :',check)
                     
                     if check == False:
+                        print('after check :',check)
+
+                        start_condition=False
                         print("Cheater!!! Or possibly made a typo...")
-                        # print(self.roller)
-                               
-                    
+                        print(randomNumber)# output 3, 1, 4, 4, 6, 4
+                        continue
+                    else:
+                        start_condition=True
+#-------------------------
+                        
 
                     GameFunction.calc_score(do_quit,self.dice,self.banker,self.total)
 
@@ -73,15 +80,7 @@ class Game:
                 
 
      
-
-
-#             >>> l = ["a","b","b"]
-# >>> l.count("a")
-# 1
-# >>> l.count("b")
-# 2
-
-                        
+              
 
 
 
