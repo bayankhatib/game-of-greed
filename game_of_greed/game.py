@@ -1,4 +1,6 @@
 from game_of_greed.game_logic import GameLogic,Banker
+from game_of_greed.functionOfGame import GameFunction
+
 
 class Game:
     def __init__(self, roller=None):
@@ -21,90 +23,26 @@ class Game:
         user_input = input("Wanna play? ")
         if user_input == 'n':
             print("OK. Maybe another time")
-
-
         else:
-
-
-
             while(True):
-                rolling(self.round,self.roller)
-                # print(f'Starting round {self.round}')
-                # print('Rolling 6 dice...')
-                # dice = self.roller(6)
-                # printable_dice = ','.join([str(d) for d in dice])
-                # print(printable_dice)
+                GameFunction.rolling(self.round,self.roller)
                 do_quit = input("Enter dice to keep (no spaces), or (q)uit: ")
-
                 if do_quit == 'q':
-                    quitting(self.banker.balance,self.total)
-
-                    # if self.banker.balance != 0 :
-
-                    #     print(f'Total score is {self.total} points')
-
-                    # print(f'Thanks for playing. You earned {self.total} points')
-
+                    GameFunction.quitting(self.banker.balance,self.total)
                     break
-
-
-                else :
-                    calc_score(do_quit,self.dice,self.banker)
-                    # turn_to_list=list(do_quit)
-                    # turn_to_tuple=tuple(int(x) for x in turn_to_list)
-                    # score=GameLogic.calculate_score(turn_to_tuple)
-                    # self.dice-=len(turn_to_tuple)
-                    # print(f'You have {score} unbanked points and {self.dice} dice remaining') 
-                    # self.banker.shelf(score)
-
+                elif do_quit=='b' :
+                    GameFunction.calc_score(do_quit,self.dice,self.banker)
                     ask_for_roll_again=input('(r)oll again, (b)ank your points or (q)uit ')
                     self.total+=self.banker.shelved
-
                     if ask_for_roll_again=='b':
-                        banking(self.banker,self.round,self.total)
-
-                        # self.banker.bank()
+                        GameFunction.banking(self.banker,self.round,self.total)
                         self.dice=6
-                        # print(f'You banked {self.banker.balance} points in round {self.round}')
-
-                        # print(f'Total score is {self.total} points')
-
                         self.round+=1
-
-def rolling(round,roller):
-        print(f'Starting round {round}')
-        print('Rolling 6 dice...')
-        dice = roller(6)
-        printable_dice = ','.join([str(d) for d in dice])
-        print(printable_dice)
-
-def quitting(balance,total):
-        if balance != 0 :
-            print(f'Total score is {total} points')
-            print(f'Thanks for playing. You earned {total} points')
-
-def calc_score(useAnswer,diceRemaining,bank):
-        turn_to_list=list(useAnswer)
-        turn_to_tuple=tuple(int(x) for x in turn_to_list)
-        score=GameLogic.calculate_score(turn_to_tuple)
-        diceRemaining-=len(turn_to_tuple)
-        print(f'You have {score} unbanked points and {diceRemaining} dice remaining') 
-        bank.shelf(score)
-
-def banking(banker,round,total):
-        banker.bank()
-        print(f'You banked {banker.balance} points in round {round}')
-        print(f'Total score is {total} points')
-
-
 
 
 
 
 if __name__ == "__main__":
-
     roller = GameLogic.roll_dice
-
     game = Game(roller)
-
     game.play()
