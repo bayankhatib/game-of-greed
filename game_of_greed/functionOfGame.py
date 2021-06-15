@@ -2,14 +2,14 @@ from game_of_greed.game_logic import GameLogic
 
 
 class GameFunction():
-  def rolling(round,roller,r):
+  def rolling(round,roller,diceNumber,r):
 
         '''
         function for rolling again in the game
         '''
         if r== True:
             print(f'Starting round {round}')
-        print('Rolling 6 dice...')
+        print(f'Rolling {diceNumber} dice...')
       #   dice = roller()
         printable_dice = ','.join([str(d) for d in roller])
         print(printable_dice)
@@ -35,13 +35,19 @@ class GameFunction():
         print(f'You have {total} unbanked points and {diceRemaining} dice remaining') 
         banker.shelf(total)
 
+        if score==1500:
+              return True
+        return False 
+            
+
   def banking(banker,total,round):
         '''
         function for banking the user point's that earned in the game
         '''
-        totalBanking=banker.bank()
+      #   totalBanking=banker.bank()
         print(f'You banked {total} points in round {round}')
-        print(f'Total score is {totalBanking} points')
+        print(f'Total score is {banker.balance} points')
+        
 
 
   def validation(userAnswer,rollDice):
@@ -56,4 +62,12 @@ class GameFunction():
             return True
       return False
      
-            
+
+  def zelchRoundOver(turn_to_tuple):
+        score=GameLogic.calculate_score(turn_to_tuple)
+        if score==0:
+              print('Zilch!!! Round over')
+              return True    
+        else:
+              return False       
+             
