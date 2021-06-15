@@ -10,8 +10,8 @@ class GameFunction():
         if r== True:
             print(f'Starting round {round}')
         print('Rolling 6 dice...')
-        dice = roller(6)
-        printable_dice = ','.join([str(d) for d in dice])
+      #   dice = roller()
+        printable_dice = ','.join([str(d) for d in roller])
         print(printable_dice)
 
   def quitting(balance):
