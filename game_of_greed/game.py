@@ -49,32 +49,25 @@ class Game:
 
 
                 else :
-                    turn_to_list=list(do_quit)
-
-                    turn_to_tuple=tuple(int(x) for x in turn_to_list)
-
-                    score=GameLogic.calculate_score(turn_to_tuple)
-                    
-                    self.dice-=len(turn_to_tuple)
-
-                    print(f'You have {score} unbanked points and {self.dice} dice remaining') 
-
-                    self.banker.shelf(score)
+                    calc_score(do_quit,self.dice,self.banker)
+                    # turn_to_list=list(do_quit)
+                    # turn_to_tuple=tuple(int(x) for x in turn_to_list)
+                    # score=GameLogic.calculate_score(turn_to_tuple)
+                    # self.dice-=len(turn_to_tuple)
+                    # print(f'You have {score} unbanked points and {self.dice} dice remaining') 
+                    # self.banker.shelf(score)
 
                     ask_for_roll_again=input('(r)oll again, (b)ank your points or (q)uit ')
-
-                    self.banker.bank()
-
-                    self.total+=self.banker.balance
-
+                    self.total+=self.banker.shelved
 
                     if ask_for_roll_again=='b':
+                        banking(self.banker,self.round,self.total)
 
+                        # self.banker.bank()
                         self.dice=6
+                        # print(f'You banked {self.banker.balance} points in round {self.round}')
 
-                        print(f'You banked {self.banker.balance} points in round {self.round}')
-
-                        print(f'Total score is {self.total} points')
+                        # print(f'Total score is {self.total} points')
 
                         self.round+=1
 
@@ -89,6 +82,20 @@ def quitting(balance,total):
         if balance != 0 :
             print(f'Total score is {total} points')
             print(f'Thanks for playing. You earned {total} points')
+
+def calc_score(useAnswer,diceRemaining,bank):
+        turn_to_list=list(useAnswer)
+        turn_to_tuple=tuple(int(x) for x in turn_to_list)
+        score=GameLogic.calculate_score(turn_to_tuple)
+        diceRemaining-=len(turn_to_tuple)
+        print(f'You have {score} unbanked points and {diceRemaining} dice remaining') 
+        bank.shelf(score)
+
+def banking(banker,round,total):
+        banker.bank()
+        print(f'You banked {banker.balance} points in round {round}')
+        print(f'Total score is {total} points')
+
 
 
 
