@@ -1,7 +1,6 @@
 from game_of_greed.game_logic import GameLogic
 from game_of_greed.banker import Banker
 from game_of_greed.functionOfGame import GameFunction
-from collections import Counter
 
 
 
@@ -33,54 +32,46 @@ class Game:
                 auto get random and 
                 '''
                 if start_condition==True:
-                    roller_dice=self.roller(6)#return tuple(values) like (3, 1, 4, 4, 6, 4)                    
-                    randomNumber=GameFunction.rolling(self.round,roller_dice,r)# output 3, 1, 4, 4, 6, 4
+                    roller_dice=self.roller(6)
+                    randomNumber=GameFunction.rolling(self.round,roller_dice,r)
                 do_quit = input("Enter dice to keep (no spaces), or (q)uit: ")
                 if do_quit == 'q':
-                    GameFunction.quitting(self.banker.balance)
+                    GameFunction.quitting(self.banker.balance,self.banker.shelved)
                     break
-                    print('----randomNumber-------',randomNumber)
 
                
                 else :
-                    turn_to_list =list(do_quit)
-                    turn_to_tuple=tuple(int(x) for x in turn_to_list)      
-                    l1=Counter(turn_to_tuple).most_common() 
-                    print(l1 ,'***')
-                    l2=Counter(roller_dice).most_common() 
-                    print(l2,'sec list' )
-                    check =  all(item in l1 for item in l1)
-                    print('before check :',check)
-                    
+                    turn_to_tuple=list(int(x) for x in list(do_quit)) 
+                    check=GameFunction.validation(turn_to_tuple,list(roller_dice))  
+   
                     if check == False:
-                        print('after check :',check)
-
                         start_condition=False
                         print("Cheater!!! Or possibly made a typo...")
-                        print(randomNumber)# output 3, 1, 4, 4, 6, 4
+                        print(randomNumber)
                         continue
                     else:
                         start_condition=True
-#-------------------------
-                        
-
+                       
                     GameFunction.calc_score(do_quit,self.dice,self.banker,self.total)
+                    self.total=self.banker.shelved
 
                     ask_for_roll_again=input('(r)oll again, (b)ank your points or (q)uit ')
-
-                    self.banker.bank
-                    self.total+=self.banker.shelved
+                    
                     if ask_for_roll_again=='b':
                         r=True
-                        GameFunction.banking(self.banker,self.round)
+                        GameFunction.banking(self.banker,self.total,self.round)
                         self.dice=6
                         self.round+=1
+                        self.total=0
                     elif ask_for_roll_again=='r':
                         r=False
+
+                    elif ask_for_roll_again=='q':
+                        GameFunction.quitting(self.banker.balance,self.banker.shelved)
+                        break
+
                 
 
-     
-              
 
 
 
