@@ -1,4 +1,5 @@
-from game_of_greed.game_logic import GameLogic,Banker
+from game_of_greed.game_logic import GameLogic
+from game_of_greed.banker import Banker
 from game_of_greed.functionOfGame import GameFunction
 
 
@@ -27,10 +28,12 @@ class Game:
             while(True):
                 GameFunction.rolling(self.round,self.roller)
                 do_quit = input("Enter dice to keep (no spaces), or (q)uit: ")
+                
                 if do_quit == 'q':
                     GameFunction.quitting(self.banker.balance,self.total)
                     break
-                elif do_quit=='b' :
+               
+                else :
                     GameFunction.calc_score(do_quit,self.dice,self.banker)
                     ask_for_roll_again=input('(r)oll again, (b)ank your points or (q)uit ')
                     self.total+=self.banker.shelved
@@ -38,6 +41,8 @@ class Game:
                         GameFunction.banking(self.banker,self.round,self.total)
                         self.dice=6
                         self.round+=1
+
+                      
 
 
 
