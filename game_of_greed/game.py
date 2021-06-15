@@ -24,23 +24,32 @@ class Game:
         user_input = input("Wanna play? ")
         if user_input == 'n':
             print("OK. Maybe another time")
-        else:
+        elif user_input == 'y':
+            r=True
             while(True):
-                GameFunction.rolling(self.round,self.roller)
+                GameFunction.rolling(self.round,self.roller,r)
                 do_quit = input("Enter dice to keep (no spaces), or (q)uit: ")
                 
                 if do_quit == 'q':
-                    GameFunction.quitting(self.banker.balance,self.total)
+                    GameFunction.quitting(self.banker.balance)
                     break
                
                 else :
-                    GameFunction.calc_score(do_quit,self.dice,self.banker)
+                    GameFunction.calc_score(do_quit,self.dice,self.banker,self.total)
                     ask_for_roll_again=input('(r)oll again, (b)ank your points or (q)uit ')
+                    self.banker.bank
                     self.total+=self.banker.shelved
                     if ask_for_roll_again=='b':
-                        GameFunction.banking(self.banker,self.round,self.total)
+                        r=True
+                        GameFunction.banking(self.banker,self.round)
                         self.dice=6
                         self.round+=1
+                    elif ask_for_roll_again=='r':
+                        r=False
+
+                        
+
+
 
                       
 
