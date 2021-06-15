@@ -1,5 +1,5 @@
-# PR : https://github.com/bayan-alkhatib/game-of-greed/pull/3
-# Resubmit PR: https://github.com/bayan-alkhatib/game-of-greed/pull/4
+# lab 8 PR : https://github.com/bayan-alkhatib/game-of-greed/pull/8
+
 
 # Team Members:
 - bayan alkhatib

@@ -42,6 +42,7 @@ class GameLogic:
     roll_dice_Input=Counter(a)
     if len(roll_dice_Input.most_common()) == 3 and roll_dice_Input.most_common()[0][1]==2 and roll_dice_Input.most_common()[1][1]==2 and roll_dice_Input.most_common()[2][1]==2 :
         return 1500
+        
     if a ==():
       return 0
     elif roll_dice_Input.most_common(1)[0]== (1,1) and len( roll_dice_Input.most_common())==6:
