@@ -10,16 +10,15 @@ class GameFunction():
         if r== True:
             print(f'Starting round {round}')
         print(f'Rolling {diceNumber} dice...')
-      #   dice = roller()
         printable_dice = ','.join([str(d) for d in roller])
         print(printable_dice)
         return printable_dice
 
-  def quitting(balance,shelved):
+  def quitting(balance,shelved,q):
         '''
         function for quit the game
         '''
-        if shelved or balance  :
+        if shelved or balance and q :
             print(f'Total score is {balance} points')
         print(f'Thanks for playing. You earned {balance} points')
 

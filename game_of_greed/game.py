@@ -3,10 +3,9 @@ from game_of_greed.banker import Banker
 from game_of_greed.functionOfGame import GameFunction
 
 
-
 class Game:
  
-    def __init__(self, roller=None,numOfgame=5):
+    def __init__(self, roller=None,numOfgame=None):
         self.banker=Banker()
         self.gameLogic=GameLogic
         self.roller = roller or GameLogic.roll_dice
@@ -32,7 +31,7 @@ class Game:
             r=True
             start_condition=True
     
-            while(self.round<=self.numOfgame):
+            while(True):
                 '''
                 auto get random and 
                 '''
@@ -49,7 +48,7 @@ class Game:
 
                 do_quit = input("Enter dice to keep (no spaces), or (q)uit: ")
                 if do_quit == 'q':
-                    GameFunction.quitting(self.banker.balance,self.banker.shelved)
+                    GameFunction.quitting(self.banker.balance,self.banker.shelved,True)
                     break
 
                
@@ -88,8 +87,13 @@ class Game:
                             self.dice-=len(turn_to_tuple)
 
                     elif ask_for_roll_again=='q':
-                        GameFunction.quitting(self.banker.balance,self.banker.shelved)
+                        GameFunction.quitting(self.banker.balance,self.banker.shelved,True)
                         break
+
+                if self.numOfgame and self.round>self.numOfgame :
+                    GameFunction.quitting(self.banker.balance,self.banker.shelved,False)
+                    break
+
 
     def staticValuesForBank(self,total): 
         GameFunction.banking(self.banker,total,self.round)

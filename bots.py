@@ -34,20 +34,20 @@ class BasePlayer(ABC):
 
         mega_total = 0
 
-        for i in range(num_games):
-            player = cls()
-            game = Game() # doesn't pass a mock roller
-            try:
-                game.play()
-            except SystemExit:
-                # in game system exit is fine
-                # because that's how they quit.
-                pass
+        # for i in range(num_games):
+        player = cls()
+        game = Game(None,num_games) # doesn't pass a mock roller
+        try:
+            game.play()
+        except SystemExit:
+            # in game system exit is fine
+            # because that's how they quit.
+            pass
 
-            mega_total += player.total_score
-            player.reset()
+        mega_total += player.total_score
+        player.reset()
             
-            print(
+        print(
             f"{num_games} games (maybe) played with average score of {mega_total // num_games}"
         )
 
@@ -90,21 +90,13 @@ class BasicBot(BasePlayer):
     def _mock_input(self, *args):
         x = args[0]
         if x.startswith('Wanna play?'):
-            return 'y'
-
-    def _roll_bank_or_quit(self):
-        """your logic here"""
-        if (self.unbanked_points > 200):
-            return "b"
-    def _enter_dice(self):
-        """simulate user entering which dice to keep.
-        Defaults to all scoring dice"""
-        return super()._enter_dice()    
+            return 'n'
     def _mock_print(self, *args):
         self.old_print(*args)
+    
     
     
 
 if __name__ == "__main__":
     # BasicBot.play(20)
-    NervousNellie.play(3)
+    NervousNellie.play(10)
