@@ -5,13 +5,16 @@ from game_of_greed.functionOfGame import GameFunction
 
 
 class Game:
-    def __init__(self, roller=None):
+ 
+    def __init__(self, roller=None,numOfgame=5):
         self.banker=Banker()
         self.gameLogic=GameLogic
-        self.roller = roller or GameLogic.roll_dice()
+        self.roller = roller or GameLogic.roll_dice
         self.total=0
         self.round=1
         self.dice=6
+        self.numOfgame=numOfgame
+
 
     def play(self):
         """ 
@@ -20,6 +23,7 @@ class Game:
        also known banked and unbanked points and total score 
        for six round and user can quit the game. 
         """
+     
         print("Welcome to Game of Greed")
         user_input = input("Wanna play? ")
         if user_input == 'n':
@@ -27,7 +31,8 @@ class Game:
         elif user_input == 'y':
             r=True
             start_condition=True
-            while(True):
+    
+            while(self.round<=self.numOfgame):
                 '''
                 auto get random and 
                 '''
