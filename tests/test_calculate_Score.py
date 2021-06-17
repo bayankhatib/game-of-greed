@@ -8,7 +8,6 @@ def test_version():
 
 pytestmark = [pytest.mark.version_1]
 
-
 def test_single_five():
     actual = GameLogic.calculate_score((5,))
     expected = 50

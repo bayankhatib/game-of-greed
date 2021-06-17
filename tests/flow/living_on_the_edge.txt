@@ -32,3 +32,4 @@ Rolling 6 dice...
 Enter dice to keep (no spaces), or (q)uit: q
 Total score is 0 points
 Thanks for playing. You earned 0 points
+

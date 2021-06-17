@@ -2,7 +2,6 @@ from game_of_greed.game_logic import GameLogic
 from game_of_greed.banker import Banker
 from game_of_greed.functionOfGame import GameFunction
 
-
 class Game:
     def __init__(self, roller=None,numOfgame=None):
         self.banker=Banker()

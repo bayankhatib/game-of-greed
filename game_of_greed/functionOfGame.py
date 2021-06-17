@@ -35,7 +35,6 @@ class GameFunction():
         print(f'You have {total+score} unbanked points and {diceRemaining} dice remaining') 
         banker.shelf(score)
 
-
   def banking(banker,total,round):
         '''
         function for banking the user point's that earned in the game

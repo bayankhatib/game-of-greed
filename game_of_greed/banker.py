@@ -19,3 +19,4 @@ class Banker:
 
     def clear_shelf(self):
         self.shelved=0
+        

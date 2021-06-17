@@ -17,7 +17,6 @@ class BasePlayer(ABC):
         self.dice_remaining = 0
         self.unbanked_points = 0
         
-
     def reset(self):
         builtins.print = self.old_print
         builtins.input = self.old_input

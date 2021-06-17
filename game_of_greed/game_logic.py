@@ -85,6 +85,7 @@ class GameLogic:
             values = random.choices(range(1,7), cum_weights=(28, 14, 15, 15, 20, 25), k=value)
         
       return tuple(values)
+      
         
 
 

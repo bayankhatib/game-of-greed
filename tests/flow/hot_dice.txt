@@ -19,3 +19,4 @@ Rolling 6 dice...
 Enter dice to keep (no spaces), or (q)uit: q
 Total score is 2400 points
 Thanks for playing. You earned 2400 points
+
