@@ -4,7 +4,7 @@ from game_of_greed.functionOfGame import GameFunction
 
 
 class Game:
-    def __init__(self, roller=None,numOfgame=20):
+    def __init__(self, roller=None,numOfgame=None):
         self.banker=Banker()
         self.gameLogic=GameLogic
         self.roller = roller or GameLogic.roll_dice
@@ -96,7 +96,7 @@ class Game:
             self.startRound_TorF=True
             self.dice=6
             self.staticValuesForBank(0)
-            self.roller_dice=self.roller(self.dice)
+            self.roller_dice=self.roller(self.dice,self.numOfgame)
             self.randomNumber=GameFunction.rolling(self.round,self.roller_dice,self.dice,self.startRound_TorF)
 
     def checkValidationFun(self):
@@ -108,7 +108,7 @@ class Game:
             self.start_condition=True
 
     def startTheGame(self):
-        self.roller_dice=self.roller(self.dice)
+        self.roller_dice=self.roller(self.dice,self.numOfgame)
         self.randomNumber=GameFunction.rolling(self.round,self.roller_dice,self.dice,self.startRound_TorF)
         self.zelch=GameFunction.zelchRoundOver(self.roller_dice)
         self.zelchOutput()        

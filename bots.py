@@ -4,6 +4,7 @@ from abc import abstractmethod,ABC
 from game_of_greed.game_logic import GameLogic
 from game_of_greed.game import Game
 
+totalListCheck=[]
 
 class BasePlayer(ABC):
     def __init__(self):
@@ -15,6 +16,7 @@ class BasePlayer(ABC):
         self.counterOfPlay=1
         self.dice_remaining = 0
         self.unbanked_points = 0
+        
 
     def reset(self):
         builtins.print = self.old_print
@@ -46,12 +48,14 @@ class BasePlayer(ABC):
                 pass
 
             mega_total += player.total_score
+            totalListCheck.append(player.total_score)
         
             player.reset()
                 
         print(
             f"{num_games} games (maybe) played with average score of {mega_total//num_games }"
         )
+        # print(f'all game score  ',totalListCheck)
 
 
 class NervousNellie(BasePlayer):
@@ -67,7 +71,6 @@ class NervousNellie(BasePlayer):
             self.roll = tuple(int(char) for char in first_arg.split(","))
         elif first_arg.startswith("Thanks for playing."):
             self.total_score = int(re.findall(r"\d+", first_arg)[0])
-            # print(self.total_score or 0,'      *** total*************')
         self.old_print(first_arg)
 
     def _mock_input(self, *args):

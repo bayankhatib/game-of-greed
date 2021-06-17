@@ -76,10 +76,14 @@ class GameLogic:
       return score 
   
    @staticmethod 
-   def roll_dice(value=6):
-      values = []
-      for i in range(value):
-        values.append(random.randint(1,6))
+   def roll_dice(value=6,checkOfTheGamer=None):
+      if checkOfTheGamer is None:
+          values = []
+          for i in range(value):
+            values.append(random.randint(1,6))
+      else:
+            values = random.choices(range(1,7), cum_weights=(28, 14, 15, 15, 20, 25), k=value)
+        
       return tuple(values)
         
 

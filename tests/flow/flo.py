@@ -51,7 +51,7 @@ class Flo:
 
         flo._exit()
 
-    def _mock_roller(self, num):
+    def _mock_roller(self, num,n):
         return self.rolls.pop(0)
 
     def _mock_print(self, *args, **kwargs):
