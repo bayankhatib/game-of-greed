@@ -82,7 +82,7 @@ class GameLogic:
           for i in range(value):
             values.append(random.randint(1,6))
       else:
-            values = random.choices(range(1,7), cum_weights=(28, 14, 15, 15, 20, 25), k=value)
+            values = random.choices(range(1,7), cum_weights=(28, 14, 15, 16, 20, 25), k=value)
         
       return tuple(values)
       

@@ -1,7 +1,6 @@
 from game_of_greed.game_logic import GameLogic
 from collections import Counter
 
-
 class GameFunction():
   def rolling(round,roller,diceNumber,startRound_TorF):
         '''
