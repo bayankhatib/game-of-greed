@@ -1,9 +1,7 @@
 import builtins
 from game_of_greed.game import Game
 
-
 class Flo:
-
     PROMPTS = (
         "Wanna play? ",
         "(r)oll again, (b)ank your points or (q)uit ",
