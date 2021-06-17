@@ -4,7 +4,7 @@ from game_of_greed.functionOfGame import GameFunction
 
 
 class Game:
-    def __init__(self, roller=None,numOfgame=None):
+    def __init__(self, roller=None,numOfgame=20):
         self.banker=Banker()
         self.gameLogic=GameLogic
         self.roller = roller or GameLogic.roll_dice

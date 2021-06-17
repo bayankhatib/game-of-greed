@@ -22,6 +22,7 @@ class GameFunction():
         if shelved or balance and q :
             print(f'Total score is {balance} points')
         print(f'Thanks for playing. You earned {balance} points')
+        
 
   def calc_score(useAnswer,diceRemaining,banker,total):
         '''
@@ -39,7 +40,6 @@ class GameFunction():
         '''
         function for banking the user point's that earned in the game
         '''
-      #   totalBanking=banker.bank()
         print(f'You banked {total} points in round {round}')
         print(f'Total score is {banker.balance} points')
         

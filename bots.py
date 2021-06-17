@@ -34,21 +34,23 @@ class BasePlayer(ABC):
 
         mega_total = 0
 
-        # for i in range(num_games):
-        player = cls()
-        game = Game(None,num_games) # doesn't pass a mock roller
-        try:
-            game.play()
-        except SystemExit:
-            # in game system exit is fine
-            # because that's how they quit.
-            pass
+        for i in range(num_games):
+            player = cls()
+            # game = Game(None,num_games) # doesn't pass a mock roller
+            game=Game()
+            try:
+                game.play()
+            except SystemExit:
+                # in game system exit is fine
+                # because that's how they quit.
+                pass
 
-        mega_total += player.total_score
-        player.reset()
-            
+            mega_total += player.total_score
+        
+            player.reset()
+                
         print(
-            f"{num_games} games (maybe) played with average score of {mega_total // num_games}"
+            f"{num_games} games (maybe) played with average score of {mega_total//num_games }"
         )
 
 
@@ -65,6 +67,7 @@ class NervousNellie(BasePlayer):
             self.roll = tuple(int(char) for char in first_arg.split(","))
         elif first_arg.startswith("Thanks for playing."):
             self.total_score = int(re.findall(r"\d+", first_arg)[0])
+            # print(self.total_score or 0,'      *** total*************')
         self.old_print(first_arg)
 
     def _mock_input(self, *args):
@@ -99,4 +102,4 @@ class BasicBot(BasePlayer):
 
 if __name__ == "__main__":
     # BasicBot.play(20)
-    NervousNellie.play(100)
+    NervousNellie.play(20)
