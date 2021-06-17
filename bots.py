@@ -104,4 +104,8 @@ class BasicBot(BasePlayer):
 
 if __name__ == "__main__":
     # BasicBot.play(20)
-    NervousNellie.play(10,20)
+    print('Hi There , My name is Clara (*^▽^*) \nI am a Bot Created by (Amarh ,bayan ,Mohammad and layan) O(∩_∩)O \nAnd i will show you Now how to play ヾ(≧▽≦*)o\nbut please answer before ( •̀ ω •́ )✧ \n\n')
+
+    numberOfGames=int(input('Enter Number Of Games That u want . ..'))
+    numberOfRouns=int(input('Enter Number Of Roundes That u want . ..'))
+    NervousNellie.play(numberOfGames,numberOfRouns)
