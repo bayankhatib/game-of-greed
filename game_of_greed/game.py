@@ -4,7 +4,6 @@ from game_of_greed.functionOfGame import GameFunction
 
 
 class Game:
- 
     def __init__(self, roller=None,numOfgame=None):
         self.banker=Banker()
         self.gameLogic=GameLogic
@@ -13,6 +12,12 @@ class Game:
         self.round=1
         self.dice=6
         self.numOfgame=numOfgame
+        self.zelch=0
+        self.startRound_TorF=True
+        self.checkValidation=True
+        self.start_condition=True
+        self.randomNumber=''
+        self.roller_dice=None
 
 
     def play(self):
@@ -22,70 +27,43 @@ class Game:
        also known banked and unbanked points and total score 
        for six round and user can quit the game. 
         """
-     
         print("Welcome to Game of Greed")
         user_input = input("Wanna play? ")
         if user_input == 'n':
             print("OK. Maybe another time")
-        elif user_input == 'y':
-            r=True
-            start_condition=True
-    
+        elif user_input == 'y':   
             while(True):
                 '''
                 auto get random and 
                 '''
-                if start_condition==True:
-                    roller_dice=self.roller(self.dice)
-                    randomNumber=GameFunction.rolling(self.round,roller_dice,self.dice,r)
-                    zelch=GameFunction.zelchRoundOver(roller_dice)
-                    if zelch:
-                        r=True
-                        self.dice=6
-                        self.staticValuesForBank(0)
-                        roller_dice=self.roller(self.dice)
-                        randomNumber=GameFunction.rolling(self.round,roller_dice,self.dice,r)
-
+                if self.start_condition==True:
+                    self.startTheGame()
+                    
                 do_quit = input("Enter dice to keep (no spaces), or (q)uit: ")
+                
                 if do_quit == 'q':
                     GameFunction.quitting(self.banker.balance,self.banker.shelved,True)
                     break
-
                
                 else :
                     turn_to_tuple=list(int(x) for x in list(do_quit)) 
-                    check=GameFunction.validation(turn_to_tuple,list(roller_dice))  
-   
-                    if check == False:
-                        start_condition=False
-                        print("Cheater!!! Or possibly made a typo...")
-                        print(randomNumber)
+                    self.checkValidation=GameFunction.validation(turn_to_tuple,list(self.roller_dice))  
+                    self.checkValidationFun()
+                    if self.start_condition is False:
                         continue
-                    else:
-                        start_condition=True
-                       
-                    checkFromThe3of2=GameFunction.calc_score(do_quit,self.dice,self.banker,self.total)
+
+                    GameFunction.calc_score(do_quit,self.dice,self.banker,self.total)
                     self.total=self.banker.shelved
                   
                     
                     ask_for_roll_again=input('(r)oll again, (b)ank your points or (q)uit ')
                     
                     if ask_for_roll_again=='b':
-                    #    totalBanking=banker.bank()
-                        r=True
-                        self.banker.bank()
+                        self.bank_Answer()
 
-                        self.staticValuesForBank(self.total)
-                    
                     elif ask_for_roll_again=='r':
-                        r=False
-                        if self.dice ==0:
-                            self.dice=6
-                        if checkFromThe3of2:
-                            self.dice=6
-                        else :    
-                            self.dice-=len(turn_to_tuple)
-
+                        self.rolling_Answer(turn_to_tuple)
+                        
                     elif ask_for_roll_again=='q':
                         GameFunction.quitting(self.banker.balance,self.banker.shelved,True)
                         break
@@ -99,8 +77,41 @@ class Game:
         GameFunction.banking(self.banker,total,self.round)
         self.dice=6
         self.round+=1
-        self.total=0           
+        self.total=0               
 
+    def bank_Answer(self):
+        self.startRound_TorF=True
+        self.banker.bank()
+        self.staticValuesForBank(self.total)
+
+    def rolling_Answer(self,userAnswerForDice):  
+        self.startRound_TorF=False
+        if self.dice ==0 or self.zelch==1500:
+            self.dice=6
+        else :    
+            self.dice-=len(userAnswerForDice)  
+
+    def zelchOutput(self):
+        if self.zelch==0:
+            self.startRound_TorF=True
+            self.dice=6
+            self.staticValuesForBank(0)
+            self.roller_dice=self.roller(self.dice)
+            self.randomNumber=GameFunction.rolling(self.round,self.roller_dice,self.dice,self.startRound_TorF)
+
+    def checkValidationFun(self):
+        if self.checkValidation == False:
+            self.start_condition=False
+            print("Cheater!!! Or possibly made a typo...")
+            print(self.randomNumber)
+        else:
+            self.start_condition=True
+
+    def startTheGame(self):
+        self.roller_dice=self.roller(self.dice)
+        self.randomNumber=GameFunction.rolling(self.round,self.roller_dice,self.dice,self.startRound_TorF)
+        self.zelch=GameFunction.zelchRoundOver(self.roller_dice)
+        self.zelchOutput()        
 
 
 

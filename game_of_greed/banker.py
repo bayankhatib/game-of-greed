@@ -9,7 +9,8 @@ class Banker:
         self.shelved=shelved
 
     def shelf(self,value):
-       self.shelved=value
+       self.shelved+=value
+       return self.shelved
 
     def bank(self):
         self.balance+=self.shelved

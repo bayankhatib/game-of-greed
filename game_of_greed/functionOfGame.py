@@ -1,14 +1,15 @@
 from game_of_greed.game_logic import GameLogic
+from collections import Counter
 
 
 class GameFunction():
-  def rolling(round,roller,diceNumber,r):
-
+  def rolling(round,roller,diceNumber,startRound_TorF):
         '''
         function for rolling again in the game
         '''
-        if r== True:
+        if startRound_TorF== True:
             print(f'Starting round {round}')
+
         print(f'Rolling {diceNumber} dice...')
         printable_dice = ','.join([str(d) for d in roller])
         print(printable_dice)
@@ -30,14 +31,9 @@ class GameFunction():
         turn_to_tuple=tuple(int(x) for x in turn_to_list)
         score=GameLogic.calculate_score(turn_to_tuple)
         diceRemaining-=len(turn_to_tuple)
-        total+=score
-        print(f'You have {total} unbanked points and {diceRemaining} dice remaining') 
-        banker.shelf(total)
+        print(f'You have {total+score} unbanked points and {diceRemaining} dice remaining') 
+        banker.shelf(score)
 
-        if score==1500:
-              return True
-        return False 
-            
 
   def banking(banker,total,round):
         '''
@@ -50,23 +46,14 @@ class GameFunction():
 
 
   def validation(userAnswer,rollDice):
-      counter=0
-      for i in range(len(userAnswer)):
-            for j in range(len(rollDice)):
-                  if userAnswer[i]==rollDice[j]:
-                    rollDice[j]=-1
-                    counter+=1
-                    break
-      if counter ==len(userAnswer):
-            return True
-      return False
+      return not (Counter(userAnswer)-Counter(rollDice))
      
 
   def zelchRoundOver(turn_to_tuple):
         score=GameLogic.calculate_score(turn_to_tuple)
         if score==0:
               print('Zilch!!! Round over')
-              return True    
+              return score    
         else:
-              return False       
+              return score       
              
