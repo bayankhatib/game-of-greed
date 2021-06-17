@@ -1,5 +1,4 @@
 import random
-
 from collections import Counter
 
 all_rules = {
@@ -36,13 +35,34 @@ all_rules = {
 class GameLogic:
    def __init__(self):
      pass
-  
+
+   @staticmethod
+   def get_scorers(dice):
+      # version_3
+
+      all_dice_score = GameLogic.calculate_score(dice) #1500
+
+      if all_dice_score == 0:
+          return tuple()
+
+      scorers = []
+      
+      for i in range(len(dice)):
+          sub_roll = dice[:i] + dice[i + 1 :]
+          sub_score = GameLogic.calculate_score(sub_roll)
+
+          if sub_score != all_dice_score:
+              scorers.append(dice[i])
+
+      return tuple(scorers)
+      
    @staticmethod
    def calculate_score(a):
     score = 0
     roll_dice_Input=Counter(a)
     if len(roll_dice_Input.most_common()) == 3 and roll_dice_Input.most_common()[0][1]==2 and roll_dice_Input.most_common()[1][1]==2 and roll_dice_Input.most_common()[2][1]==2 :
         return 1500
+        
     if a ==():
       return 0
     elif roll_dice_Input.most_common(1)[0]== (1,1) and len( roll_dice_Input.most_common())==6:
@@ -53,16 +73,16 @@ class GameLogic:
       case01=roll_dice_Input.most_common()
       for case in  case01:
         score+=dic_counter[str(case)]
-        print(score)
       return score 
   
    @staticmethod 
-   def roll_dice(value):
+   def roll_dice(value=6):
       values = []
       for i in range(value):
         values.append(random.randint(1,6))
       return tuple(values)
         
+
 
 
 
