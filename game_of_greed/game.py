@@ -27,7 +27,10 @@ class Game:
        for six round and user can quit the game. 
         """
         print("Welcome to Game of Greed")
-        user_input = input("Wanna play? ")
+        try:
+            user_input = input("Wanna play? ")
+        except:
+            raise "You Didn't answer Right "    
         if user_input == 'n':
             print("OK. Maybe another time")
         elif user_input == 'y':   
@@ -37,14 +40,15 @@ class Game:
                 '''
                 if self.start_condition==True:
                     self.startTheGame()
-                    
-                do_quit = input("Enter dice to keep (no spaces), or (q)uit: ")
-                
+                try:    
+                    do_quit = input("Enter dice to keep (no spaces), or (q)uit: ")
+                except:
+                    raise "You Didn't answer Right"
                 if do_quit == 'q':
                     GameFunction.quitting(self.banker.balance,self.banker.shelved,True)
                     break
                
-                else :
+                elif do_quit.isdigit():
                     turn_to_tuple=list(int(x) for x in list(do_quit)) 
                     self.checkValidation=GameFunction.validation(turn_to_tuple,list(self.roller_dice))  
                     self.checkValidationFun()
@@ -54,9 +58,10 @@ class Game:
                     GameFunction.calc_score(do_quit,self.dice,self.banker,self.total)
                     self.total=self.banker.shelved
                   
-                    
-                    ask_for_roll_again=input('(r)oll again, (b)ank your points or (q)uit ')
-                    
+                    try:
+                        ask_for_roll_again=input('(r)oll again, (b)ank your points or (q)uit ')
+                    except:
+                        raise "You Didn't answer Right"
                     if ask_for_roll_again=='b':
                         self.bank_Answer()
 
