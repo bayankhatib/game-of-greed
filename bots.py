@@ -30,14 +30,14 @@ class BasePlayer(ABC):
         return self.old_input(*args)
 
     @classmethod
-    def play(cls, num_games=1):
+    def play(cls, num_games=1,numberOfRounds=20):
 
         mega_total = 0
 
         for i in range(num_games):
             player = cls()
-            # game = Game(None,num_games) # doesn't pass a mock roller
-            game=Game()
+            game = Game(None,numberOfRounds) # doesn't pass a mock roller
+            # game=Game()
             try:
                 game.play()
             except SystemExit:
@@ -102,4 +102,4 @@ class BasicBot(BasePlayer):
 
 if __name__ == "__main__":
     # BasicBot.play(20)
-    NervousNellie.play(20)
+    NervousNellie.play(10,20)
